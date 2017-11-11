@@ -134,7 +134,7 @@ export class MapContainer extends React.Component {
                   position={{ lat: place.lat, lng: place.lng }}
                   icon={{
                     url:
-                      'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Home-icon.png',
+                      'https://cdn0.iconfinder.com/data/icons/healthcare-medicine/512/hospital_location-512.png',
                     anchor: new this.props.google.maps.Point(32, 32),
                     scaledSize: new this.props.google.maps.Size(32, 32)
                   }}

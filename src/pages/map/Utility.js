@@ -68,7 +68,7 @@ const Utility = {
   /*This function returns the location and contact info
 of nyc hospitals and health facilities*/
   getHospitalCenters: (self) => {
-      fetch('https://cdn0.iconfinder.com/data/icons/healthcare-medicine/512/hospital_location-512.png')
+      fetch('https://data.cityofnewyork.us/resource/ymhw-9cz9.json')
       .then(res => res.json())
       .then(hospitals =>{
           let hospitalArray = hospitals.map(hospital =>{

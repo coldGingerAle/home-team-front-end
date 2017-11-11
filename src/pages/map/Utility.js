@@ -54,7 +54,8 @@ const Utility = {
                       name:homeBase.homebase_office,
                       address: homeBase.address,
                       lat: homeBase.latitude,
-                      lng: homeBase.longitude
+                      lng: homeBase.longitude,
+                      nta: homeBase.nta,
                   }
                   return homeBase_location;
               })

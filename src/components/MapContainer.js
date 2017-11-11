@@ -8,7 +8,10 @@ export class MapContainer extends React.Component {
       currentLocation: {
         lat: 0,
         lat: 0
-      }
+      },
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
     };
   }
 
@@ -56,12 +59,10 @@ export class MapContainer extends React.Component {
           lng: this.state.currentLocation.lng
         }}
         zoom={17}
-        onClick={this.onMapClicked}
         visible={true}
         icon={{
           url: 'https://wallpaperbrowse.com/media/images/pictures-1.jpg'
         }}
-        name="Marker"
       >
         {this.props.wifihotspotsSelected &&
           this.props.wifihotspots.map((place, index) => {
@@ -76,7 +77,7 @@ export class MapContainer extends React.Component {
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-               
+                name="Wifi"
               />
             );
           })}
@@ -94,7 +95,7 @@ export class MapContainer extends React.Component {
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-              
+                name="DropInCenter"
               />
             );
           })}
@@ -105,20 +106,24 @@ export class MapContainer extends React.Component {
               <Marker
                 key={index}
                 onClick={this.onMarkerClick}
-                position={{ lat: place.loc.lat, lng: place.loc.lng }}
+                position={{ lat: place.lat, lng: place.lng }}
                 icon={{
                   url:
                     'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Home-icon.png',
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
+                name={<p>{place.nta}</p>}
               />
             );
           })}
 
-        <InfoWindow onClose={this.onInfoWindowClose}>
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+        >
           <div>
-            <h1>{this.state.selectedPlace}</h1>
+            <h1>{this.state.selectedPlace.name}</h1>
           </div>
         </InfoWindow>
       </Map>

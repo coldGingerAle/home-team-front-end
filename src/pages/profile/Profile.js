@@ -5,7 +5,7 @@ import './Profile.css';
 class Profile extends Component {
   render() {
     return (
-      <div>
+      <div id="page-wrap">
         <h1>Profile</h1>
         <div className="btn btn-primary" onClick={() => this.props.history.push('/')}>
           Home

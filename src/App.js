@@ -6,7 +6,7 @@ import PageShell from './components/PageShell'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" id="outer-container">
         <Route path="/" exact={true} component={PageShell(Home)}></Route>
         <Route path="/profile" exact component={PageShell(Profile)}></Route>
       </div>

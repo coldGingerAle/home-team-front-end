@@ -16,6 +16,8 @@ class Map extends Component {
   }
 
   componentDidMount() {
+    var receivedMessage = this.props.location.state.message;
+    console.log(receivedMessage);
     var self = this;
     Utility.getWifiHotSpots(self);
   }

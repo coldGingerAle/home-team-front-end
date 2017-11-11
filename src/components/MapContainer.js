@@ -6,8 +6,8 @@ export class MapContainer extends React.Component {
     super(props);
     this.state = {
       currentLocation: {
-        lat: 0,
-        lat: 0
+        lat: 40.7127753,
+        lng: -74.0059728
       },
       showingInfoWindow: false,
       activeMarker: {},
@@ -16,17 +16,13 @@ export class MapContainer extends React.Component {
   }
 
   componentDidMount() {
-    if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const coords = pos.coords;
-        this.setState({
-          currentLocation: {
-            lat: coords.latitude,
-            lng: coords.longitude
-          }
-        });
-      });
-    }
+    var self = this;
+    this.setState({
+      currentLocation: {
+        lat: self.props.location.lat,
+        lng: self.props.location.lng,
+      }
+})
   }
   onMarkerClick = (props, marker, e) => {
     this.setState({
@@ -64,6 +60,17 @@ export class MapContainer extends React.Component {
           url: 'https://wallpaperbrowse.com/media/images/pictures-1.jpg'
         }}
       >
+      <Marker
+        onClick={this.onMarkerClick}
+        position={{ lat: this.state.currentLocation.lat, lng: this.state.currentLocation.lng }}
+        icon={{
+          url:
+            'http://fairweathers.co.uk/wp-content/uploads/2013/08/pegman.png',
+          anchor: new this.props.google.maps.Point(32, 32),
+          scaledSize: new this.props.google.maps.Size(32, 42)
+        }}
+        name="Here"
+      />
         {this.props.wifihotspotsSelected &&
           this.props.wifihotspots.map((place, index) => {
             return (
@@ -117,6 +124,24 @@ export class MapContainer extends React.Component {
               />
             );
           })}
+
+          {this.props.hospitalCentersSelected &&
+            this.props.hospitalCenters.map((place, index) => {
+              return (
+                <Marker
+                  key={index}
+                  onClick={this.onMarkerClick}
+                  position={{ lat: place.lat, lng: place.lng }}
+                  icon={{
+                    url:
+                      'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Home-icon.png',
+                    anchor: new this.props.google.maps.Point(32, 32),
+                    scaledSize: new this.props.google.maps.Size(32, 32)
+                  }}
+                  name={<p>{place.nta}</p>}
+                />
+              );
+            })}
 
         <InfoWindow
           marker={this.state.activeMarker}

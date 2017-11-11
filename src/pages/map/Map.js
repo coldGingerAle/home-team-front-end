@@ -12,14 +12,17 @@ class Map extends Component {
     this.toggleWifihotspotsSelected = this.toggleWifihotspotsSelected.bind(this);
     this.toggleDropInCentersSelected = this.toggleDropInCentersSelected.bind(this);
     this.toggleHomeBasesSelected = this.toggleHomeBasesSelected.bind(this);
+    this.toggleHospitalCentersSelected = this.toggleHospitalCentersSelected.bind(this);
     this.state = {
       places : [{lat: 37.778519, lng: -122.405640},{lat: 37.759703, lng: -122.428093},{lat: 37.762391, lng: -122.439192}],
       wifihotspotsSelected: true,
       dropInCentersSelected: false,
       homeBasesSelected: false,
+      hospitalCentersSelected: false,
       wifihotspots: [],
       dropInCenters: [],
-      homeBases: []
+      homeBases: [],
+      hospitalCenters: []
     }
   }
 
@@ -44,13 +47,21 @@ class Map extends Component {
     })
   }
 
+  toggleHospitalCentersSelected() {
+    var self = this;
+    this.setState({
+      hospitalCentersSelected: !self.state.hospitalCentersSelected
+    })
+  }
+
   componentDidMount() {
-    var receivedMessage = this.props.location.state.message;
+    var receivedMessage = this.props.location.state.loc;
     console.log(receivedMessage);
     var self = this;
     Utility.getWifiHotSpots(self);
     Utility.getHomelessDropInCenters(self);
     Utility.getHomeBaseLocations(self);
+    Utility.getHospitalCenters(self);
   }
 
   render() {
@@ -60,15 +71,19 @@ class Map extends Component {
           <Checkbox toggle={this.toggleWifihotspotsSelected} selected={this.state.wifihotspotsSelected} name={"Wifi Hotspots"}/>
           <Checkbox toggle={this.toggleDropInCentersSelected} selected={this.state.dropInCentersSelected} name={"Drop In Centers"}/>
           <Checkbox toggle={this.toggleHomeBasesSelected} selected={this.state.homeBasesSelected} name={"Home Base Locations"}/>
+          <Checkbox toggle={this.toggleHospitalCentersSelected} selected={this.state.hospitalCentersSelected} name={"Hospital Locations"}/>
         </div>
         <div className="col-md-8" style={{height: 500}}>
           <MapContainer
             wifihotspotsSelected = {this.state.wifihotspotsSelected}
             dropInCentersSelected = {this.state.dropInCentersSelected}
             homeBasesSelected = {this.state.homeBasesSelected}
+            hospitalCentersSelected = {this.state.hospitalCentersSelected}
             wifihotspots = {this.state.wifihotspots}
             dropInCenters = {this.state.dropInCenters}
             homeBases = {this.state.homeBases}
+            hospitalCenters = {this.state.hospitalCenters}
+            location = {this.props.location.state.loc}
            />
         </div>
       </div>

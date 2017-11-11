@@ -18,7 +18,7 @@ const Utility = {
             lng: hotspot.location_lat_long.coordinates[0]
           }
           hotspot.loc= hotspot_lat_long;
-         
+
           return hotspot;
         })
         self.setState({
@@ -63,6 +63,28 @@ const Utility = {
                   homeBases: homeBaseArray
               })
           })
+  },
+
+  /*This function returns the location and contact info
+of nyc hospitals and health facilities*/
+  getHospitalCenters: (self) => {
+      fetch('https://cdn0.iconfinder.com/data/icons/healthcare-medicine/512/hospital_location-512.png')
+      .then(res => res.json())
+      .then(hospitals =>{
+          let hospitalArray = hospitals.map(hospital =>{
+              let hospitals_name_address ={
+                  name: hospital.facility_name,
+                  address: hospital.human_address,
+                  lat: hospital.location_1.latitude,
+                  lng: hospital.location_1.longitude
+              }
+              return hospitals_name_address;
+          })
+          self.setState({
+              hospitalCenters: hospitalArray
+          })
+          console.log(self.state.hospitalCenters);
+      })
   }
 
 }

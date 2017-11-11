@@ -19,7 +19,7 @@ class Home extends Component {
        .then(results => getLatLng(results[0]))
        .then(latLng => {
          console.log('Success', latLng)
-         this.props.history.push({pathname: '/map', state: {message: latLng}});
+         this.props.history.push({pathname: '/map', state: {loc: latLng}});
        })
        .catch(error => console.error('Error', error))
 
@@ -40,8 +40,8 @@ class Home extends Component {
         <div className="col s6 white">
         <PlacesAutocomplete inputProps={inputProps} /></div>
 
-        <button type="submit" className="btn col s3">Submit</button>
-    </div>
+        <div className="col s2"><button type="submit" className="btn">Submit</button>
+        </div></div>
       </form>
 </div>
       </div>

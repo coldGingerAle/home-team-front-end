@@ -4,6 +4,26 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 export class MapContainer extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      currentLocation: {
+        lat: 0,
+        lat: 0
+      }
+    }
+  }
+
+  componentDidMount() {
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            const coords = pos.coords;
+            this.setState({
+                currentLocation: {
+                    lat: coords.latitude,
+                    lng: coords.longitude
+                }
+            })
+        })
+    }
   }
 
   render() {
@@ -17,8 +37,8 @@ export class MapContainer extends React.Component {
         style={{width: '100%', height: '500px', position: 'relative'}}
         className={'map'}
         initialCenter={{
-          lat: 40.745968,
-          lng: -73.994039
+          lat: this.state.currentLocation.lat,
+          lng: this.state.currentLocation.lng
         }}
         zoom={17}
         onClick={this.onMapClicked}
@@ -33,6 +53,12 @@ export class MapContainer extends React.Component {
           return <Marker key={index}
           position={{lat:place.lat, lng: place.lng}} />
         })}
+
+        {this.props.homeBasesSelected && this.props.homeBases.map((place,index) => {
+          return <Marker key={index}
+          position={{lat:place.lat, lng: place.lng}} />
+        })}
+
         <InfoWindow onClose={this.onInfoWindowClose}>
           <div>
             <h1 />

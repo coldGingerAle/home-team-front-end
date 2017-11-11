@@ -1,0 +1,10 @@
+.home {
+  background: url('https://fthmb.tqn.com/ARpsGX6VWaDb7BUslcrwFhRyokk=/960x0/filters:no_upscale()/backpacker-in-new-york-city-587b58c45f9b584db323a086.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 0 !important;
+  height: 100vh;
+  width: 100vw;
+}

@@ -25,7 +25,6 @@ export class MapContainer extends React.Component {
         self.setState({
           wifihotspots: hotspotsArray
         })
-        console.log(self.state.wifihotspots)
       })
   }
 

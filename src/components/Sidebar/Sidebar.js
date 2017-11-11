@@ -1,6 +1,4 @@
 import React from 'react';
-import { elastic as Menu } from 'react-burger-menu';
-import Checkbox from '../Checkbox/Checkbox';
 import './Sidebar.css';
 export default class Sidebar extends React.Component {
   showSettings(event) {
@@ -19,7 +17,7 @@ export default class Sidebar extends React.Component {
               <a >Filter</a>
             </li>
             <li>
-                <Checkbox name={"Wifi Hotspots"}/>
+              <a >Dashboard</a>
             </li>
             <li>
               <a >Shortcuts</a>

@@ -1,3 +1,4 @@
+
 const Utility = {
   Add: (x) => {
     console.log("Called Add", x)
@@ -16,7 +17,9 @@ const Utility = {
             lat: hotspot.location_lat_long.coordinates[1],
             lng: hotspot.location_lat_long.coordinates[0]
           }
-          return hotspot_lat_long;
+          hotspot.loc= hotspot_lat_long;
+         
+          return hotspot;
         })
         self.setState({
           wifihotspots: hotspotsArray
@@ -31,9 +34,10 @@ const Utility = {
         let locationsArray = locations.map(location => {
           let locationObject = {
             lat: location.latitude,
-            lng: location.longitude
+            lng: location.longitude,
           }
-          return locationObject;
+          location.loc= locationObject;
+          return location;
         })
         self.setState({
           dropInCenters: locationsArray

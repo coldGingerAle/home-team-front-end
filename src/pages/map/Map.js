@@ -3,7 +3,6 @@ import {withRouter} from "react-router-dom";
 import MapContainer from '../../components/MapContainer';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import Utility from './Utility';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import './Map.css';
 
 class Map extends Component {
@@ -42,20 +41,11 @@ class Map extends Component {
   }
 
   render() {
-    Utility.Add(123);
-    Utility.Subtract(123);
     return (
-<<<<<<< HEAD
-      <div className="container-fluid" >
-        <Sidebar/>
-        <div className="col-md-2 col-md-offset-1 card-3"  style={{height: 500}}>
-          <Checkbox name={"Wifi Hotspots"}/>
-=======
       <div className="container-fluid">
         <div className="col-md-2 col-md-offset-1 card-3" style={{height: 500}}>
           <Checkbox toggle={this.toggleWifihotspotsSelected} selected={this.state.wifihotspotsSelected} name={"Wifi Hotspots"}/>
           <Checkbox toggle={this.toggleDropInCentersSelected} selected={this.state.dropInCentersSelected} name={"Drop In Centers"}/>
->>>>>>> 5219c9ec79a308d7a5f10d10c0018525f12e534a
         </div>
         <div className="col-md-8" style={{height: 500}}>
           <MapContainer

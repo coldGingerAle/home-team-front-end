@@ -5,10 +5,25 @@ export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {}
+      currentLocation: {
+        lat: 0,
+        lat: 0
+      }
     };
+  }
+
+  componentDidMount() {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const coords = pos.coords;
+        this.setState({
+          currentLocation: {
+            lat: coords.latitude,
+            lng: coords.longitude
+          }
+        });
+      });
+    }
   }
   onMarkerClick = (props, marker, e) => {
     this.setState({
@@ -37,8 +52,8 @@ export class MapContainer extends React.Component {
         style={{ width: '100%', height: '500px', position: 'relative' }}
         className={'map'}
         initialCenter={{
-          lat: 40.745968,
-          lng: -73.994039
+          lat: this.state.currentLocation.lat,
+          lng: this.state.currentLocation.lng
         }}
         zoom={17}
         onClick={this.onMapClicked}
@@ -46,12 +61,13 @@ export class MapContainer extends React.Component {
         icon={{
           url: 'https://wallpaperbrowse.com/media/images/pictures-1.jpg'
         }}
+        name="Marker"
       >
         {this.props.wifihotspotsSelected &&
           this.props.wifihotspots.map((place, index) => {
             return (
               <Marker
-              onClick={this.onMarkerClick}
+                onClick={this.onMarkerClick}
                 key={index}
                 position={{ lat: place.loc.lat, lng: place.loc.lng }}
                 icon={{
@@ -60,6 +76,7 @@ export class MapContainer extends React.Component {
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
+               
               />
             );
           })}
@@ -77,15 +94,31 @@ export class MapContainer extends React.Component {
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
+              
               />
             );
           })}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-        >
+
+        {this.props.homeBasesSelected &&
+          this.props.homeBases.map((place, index) => {
+            return (
+              <Marker
+                key={index}
+                onClick={this.onMarkerClick}
+                position={{ lat: place.loc.lat, lng: place.loc.lng }}
+                icon={{
+                  url:
+                    'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Home-icon.png',
+                  anchor: new this.props.google.maps.Point(32, 32),
+                  scaledSize: new this.props.google.maps.Size(32, 32)
+                }}
+              />
+            );
+          })}
+
+        <InfoWindow onClose={this.onInfoWindowClose}>
           <div>
-            <h1>{this.state.selectedPlace.name}</h1>
+            <h1>{this.state.selectedPlace}</h1>
           </div>
         </InfoWindow>
       </Map>

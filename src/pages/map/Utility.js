@@ -43,6 +43,25 @@ const Utility = {
           dropInCenters: locationsArray
         })
       })
+  },
+
+  getHomeBaseLocations: (self) => {
+      fetch('https://data.cityofnewyork.us/resource/5ud2-iqje.json')
+          .then(res => res.json())
+          .then(homeBases => {
+              let homeBaseArray = homeBases.map(homeBase =>{
+                  let homeBase_location = {
+                      name:homeBase.homebase_office,
+                      address: homeBase.address,
+                      lat: homeBase.latitude,
+                      lng: homeBase.longitude
+                  }
+                  return homeBase_location;
+              })
+              self.setState({
+                  homeBases: homeBaseArray
+              })
+          })
   }
 
 }

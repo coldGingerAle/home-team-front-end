@@ -5,7 +5,7 @@ import './SignUp.css';
 class SignUp extends Component {
   render() {
     return (
-      <div>
+      <div id="page-wrap">
         <h1>Profile</h1>
       </div>
     );

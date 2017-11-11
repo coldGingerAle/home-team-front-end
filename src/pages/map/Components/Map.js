@@ -49,7 +49,11 @@ export class MapContainer extends React.Component {
       >
         {this.state.wifihotspots.map((place,index) => {
           return <Marker key={index}
-          position={{lat:place.lat, lng: place.lng}} />
+          position={{lat:place.lat, lng: place.lng} }  icon={{
+            url: place.pictureURL,
+            anchor: new this.props.google.maps.Point(32,32),
+            scaledSize: new this.props.google.maps.Size(64,64)
+          }}  />
         })}
         <InfoWindow onClose={this.onInfoWindowClose}>
           <div>

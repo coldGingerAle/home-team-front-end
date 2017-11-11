@@ -1,11 +1,9 @@
 import React from 'react';
-import Navbar from './Navbar/Navbar'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const PageShell = Page => {
   return props =>
     <div className="page">
-      <Navbar />
       <ReactCSSTransitionGroup
         transitionAppear={true}
         transitionAppearTimeout={600}

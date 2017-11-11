@@ -1,14 +1,22 @@
-import { Route } from 'react-router-dom';
+import { Route, Switch ,BrowserRouter} from 'react-router-dom';
 import React, { Component } from 'react';
-import Home from './pages/home/Home'
-import Profile from './pages/profile/Profile'
-import PageShell from './components/PageShell'
+import Home from './pages/home/Home';
+import Profile from './pages/profile/Profile';
+import Map from './pages/map/Map';
+import PageShell from './components/PageShell';
+
 class App extends Component {
   render() {
     return (
-      <div className="App" id="outer-container">
-        <Route path="/" exact={true} component={PageShell(Home)}></Route>
-        <Route path="/profile" exact component={PageShell(Profile)}></Route>
+      <div className="App" >
+     
+        
+        <Switch >
+          <Route path="/" exact={true} component={PageShell(Home)} />
+          <Route path="/profile" exact component={PageShell(Profile)} />
+          <Route path="/map" exact component={PageShell(Map)} />
+        </Switch>
+        
       </div>
     );
   }

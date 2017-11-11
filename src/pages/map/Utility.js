@@ -22,7 +22,25 @@ const Utility = {
           wifihotspots: hotspotsArray
         })
       })
+  },
+
+  getHomelessDropInCenters: (self) => {
+    fetch('https://data.cityofnewyork.us/resource/kjtk-8yxq.json')
+      .then(res => res.json())
+      .then(locations => {
+        let locationsArray = locations.map(location => {
+          let locationObject = {
+            lat: location.latitude,
+            lng: location.longitude
+          }
+          return locationObject;
+        })
+        self.setState({
+          dropInCenters: locationsArray
+        })
+      })
   }
+
 }
 
 export default Utility;

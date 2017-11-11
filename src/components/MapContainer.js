@@ -16,6 +16,7 @@ export class MapContainer extends React.Component {
     if (!this.props.loaded) {
       return <div>Loading...</div>
     }
+
     return (
       <Map
         google={this.props.google}
@@ -33,7 +34,12 @@ export class MapContainer extends React.Component {
 
         }}
       >
-        {this.props.wifihotspots.map((place,index) => {
+        {this.props.wifihotspotsSelected && this.props.wifihotspots.map((place,index) => {
+          return <Marker key={index}
+          position={{lat:place.lat, lng: place.lng}} />
+        })}
+
+        {this.props.dropInCentersSelected && this.props.dropInCenters.map((place,index) => {
           return <Marker key={index}
           position={{lat:place.lat, lng: place.lng}} />
         })}

@@ -28,7 +28,6 @@ class Navbar extends Component {
             <ul className="nav navbar-nav">
               <li><Link to="/"><div className="font-big" >Home</div><span className="sr-only">(current)</span></Link></li>
               <li><Link to="/map"><div className="font-big" >Map</div></Link></li>
-              <li><Link to="/profile"><div className="font-big" >Profile</div></Link></li>
             </ul>
 
           </div>

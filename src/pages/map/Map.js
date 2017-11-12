@@ -26,7 +26,7 @@ class Map extends Component {
       dropInCenters: [],
       homeBases: [],
       hospitalCenters: [],
-      address: { address: 'Brooklyn, NY' },
+      address: 'Brooklyn, NY',
       updatedLocation: {},
       currentLocation: {
         lat: 0,

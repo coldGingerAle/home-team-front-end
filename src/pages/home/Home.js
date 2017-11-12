@@ -34,12 +34,12 @@ class Home extends Component {
       <div className="container-fluid home">
         <div className="container center">
           <form onSubmit={this.handleFormSubmit}>
-          <div className="row">
+          <div className="col-xs-10 col-xs-offset-2 col-md-10 col-md-offset-5">
 
             <div className="col s6 white">
               <PlacesAutocomplete inputProps={inputProps} /></div>
 
-          <div className="col s2"><button type="submit" className="btn">Submit</button>
+          <div className="col-md-6 col-md-offset-3 col s2"><button type="submit" className="btn col-xs-10 col-xs-offset-1"><i className="fa fa-search" aria-hidden="true"></i> Submit</button>
           </div></div>
         </form>
         </div>

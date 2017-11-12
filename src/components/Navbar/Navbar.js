@@ -19,7 +19,7 @@ class Navbar extends Component {
               <span className="icon-bar"></span>
             </button>
             <div className="img-wrap">
-            <a className="navbar-brand" ><Link to="/"><img className="img-responsive "src={logo} /> </Link></a>
+        <Link to="/"><img className="img-responsive "src={logo} alt="logo"/> </Link>
             </div>
           </div>
 

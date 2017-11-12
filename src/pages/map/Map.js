@@ -66,14 +66,14 @@ class Map extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="col-md-2 col-md-offset-1 card-3" style={{height: 500}}>
+      <div className="container-fluid move-down">
+        <div className="col-md-2 card-3" style={{height: 500}}>
           <Checkbox toggle={this.toggleWifihotspotsSelected} selected={this.state.wifihotspotsSelected} name={"Wifi Hotspots"}/>
           <Checkbox toggle={this.toggleDropInCentersSelected} selected={this.state.dropInCentersSelected} name={"Drop In Centers"}/>
           <Checkbox toggle={this.toggleHomeBasesSelected} selected={this.state.homeBasesSelected} name={"Home Base Locations"}/>
           <Checkbox toggle={this.toggleHospitalCentersSelected} selected={this.state.hospitalCentersSelected} name={"Hospital Locations"}/>
         </div>
-        <div className="col-md-8" style={{height: 500}}>
+        <div className="col-md-8 move-down" style={{height: 500}}>
           <MapContainer
             wifihotspotsSelected = {this.state.wifihotspotsSelected}
             dropInCentersSelected = {this.state.dropInCentersSelected}

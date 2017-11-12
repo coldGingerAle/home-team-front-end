@@ -54,9 +54,7 @@ class Map extends Component {
     })
   }
 
-  componentDidMount() {
-    var receivedMessage = this.props.location.state.loc;
-    console.log(receivedMessage);
+  componentDidMount() {;
     var self = this;
     Utility.getWifiHotSpots(self);
     Utility.getHomelessDropInCenters(self);
@@ -83,7 +81,7 @@ class Map extends Component {
             dropInCenters = {this.state.dropInCenters}
             homeBases = {this.state.homeBases}
             hospitalCenters = {this.state.hospitalCenters}
-            location = {this.props.location.state.loc}
+            location = {this.props.location.state ? this.props.location.state.loc : {"lat": 40.6781784, "lng": -73.9441579}}
            />
         </div>
       </div>

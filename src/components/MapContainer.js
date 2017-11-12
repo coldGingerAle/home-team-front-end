@@ -63,13 +63,13 @@ componentDidMount() {
       <Map
         google={this.props.google}
         onClick={this.onMapClicked}
-        style={{ width: '100%', height: '500px', position: 'relative' }}
+        style={{ width: '100%', height: '350px', position: 'relative' }}
         className={'map'}
         initialCenter={{
           lat: this.state.currentLocation.lat,
           lng: this.state.currentLocation.lng
         }}
-        zoom={17}
+        zoom={13}
         visible={true}
         icon={{
           url: 'https://wallpaperbrowse.com/media/images/pictures-1.jpg'

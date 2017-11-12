@@ -112,7 +112,7 @@ class Map extends Component {
       <div className="container-fluid">
 
 
-        <div className="col-md-10 col-md-offset-1" style={{ height: 500, marginBottom: 10 }}>
+        <div className="col-md-10 col-md-offset-1" style={{ height: 350, marginBottom: 10 }}>
           <MapContainer
             wifihotspotsSelected = {this.state.wifihotspotsSelected}
             dropInCentersSelected = {this.state.dropInCentersSelected}
@@ -128,11 +128,11 @@ class Map extends Component {
         </div>
 
         <div
-          className="col-md-5 col-md-offset-1 card-3"
+          className="col-md-5 col-md-offset-1 card-3 col-xs-12"
           style={{ height: 200}}
         >
 
-          <div className="col-md-6">
+          <div className="col-md-6 col-xs-12">
           <Checkbox
             toggle={this.toggleWifihotspotsSelected}
             selected={this.state.wifihotspotsSelected}

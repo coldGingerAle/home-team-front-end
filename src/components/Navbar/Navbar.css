@@ -1,0 +1,22 @@
+@media only screen and (max-width: 768px) {
+    .navbar { height: 10px !important}
+}
+
+.img-wrap {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 20px;
+
+}
+
+.navbar{
+  height: 130px !important;
+}
+
+.font-big{
+  font-size: 36px !important;
+  margin-top: 45px;
+}

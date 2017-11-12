@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
+import logo from './lighthouse_logo.png';
 
 class Navbar extends Component {
   render() {
@@ -16,17 +17,20 @@ class Navbar extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" >Brand</a>
+            <div className="img-wrap">
+          <Link to="/"><img className="img-responsive "src={logo} /> </Link>
+            </div>
           </div>
 
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
             <ul className="nav navbar-nav">
-              <li><Link to="/">Home<span className="sr-only">(current)</span></Link></li>
-              <li><Link to="/map">Map</Link></li>
-              <li><Link to="/profile">Profile</Link></li>
+              <li><Link to="/"><div className="font-big" >Home</div><span className="sr-only">(current)</span></Link></li>
+              <li><Link to="/map"><div className="font-big" >Map</div></Link></li>
+              <li><Link to="/profile"><div className="font-big" >Profile</div></Link></li>
             </ul>
-            
+
           </div>
         </div>
         </nav>

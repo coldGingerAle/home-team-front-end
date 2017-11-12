@@ -17,9 +17,9 @@ const Utility = {
             lat: hotspot.location_lat_long.coordinates[1],
             lng: hotspot.location_lat_long.coordinates[0]
           }
-          hotspot.loc= hotspot_lat_long;
+         
 
-          return hotspot;
+          return hotspot_lat_long;
         })
         self.setState({
           wifihotspots: hotspotsArray
@@ -36,8 +36,8 @@ const Utility = {
             lat: location.latitude,
             lng: location.longitude,
           }
-          location.loc= locationObject;
-          return location;
+          
+          return locationObject;
         })
         self.setState({
           dropInCenters: locationsArray
@@ -67,26 +67,70 @@ const Utility = {
 
   /*This function returns the location and contact info
 of nyc hospitals and health facilities*/
-  getHospitalCenters: (self) => {
-      fetch('https://data.cityofnewyork.us/resource/ymhw-9cz9.json')
+  getHospitalCenters: self => {
+    fetch('https://data.cityofnewyork.us/resource/ymhw-9cz9.json')
       .then(res => res.json())
-      .then(hospitals =>{
-          let hospitalArray = hospitals.map(hospital =>{
-              let hospitals_name_address ={
-                  name: hospital.facility_name,
-                  address: hospital.human_address,
-                  lat: hospital.location_1.latitude,
-                  lng: hospital.location_1.longitude
-              }
-              return hospitals_name_address;
-          })
-          self.setState({
-              hospitalCenters: hospitalArray
-          })
-          console.log(self.state.hospitalCenters);
-      })
+      .then(hospitals => {
+        let hospitalArray = hospitals.map(hospital => {
+          let hospitals_name_address = {
+            name: hospital.facility_name,
+            address: hospital.human_address,
+            lat: hospital.location_1.latitude,
+            lng: hospital.location_1.longitude
+          };
+          return hospitals_name_address;
+        });
+        self.setState({
+          hospitalCenters: hospitalArray
+        });
+      });
+  },
+  getMentalHealthLocations: self => {
+    fetch('https://data.cityofnewyork.us/resource/8nqg-ia7v.json')
+      .then(res => res.json())
+      .then(MHCs => {
+        let MHCArray = MHCs.map(
+          MHC_from_array => {
+            let MHC_location = {
+              name1: MHC_from_array.name_1,
+              name2: MHC_from_array.name_2,
+              street: MHC_from_array.street_1,
+              zip: MHC_from_array.zip,
+              website: MHC_from_array.website,
+              lat: MHC_from_array.latitude,
+              lng: MHC_from_array.longitude
+            };
+            return MHC_location;
+          }
+        );
+        self.setState({
+          MHC: MHCArray
+        });
+      });
+  },
+  getJobLocations: self => {
+    fetch('https://data.cityofnewyork.us/resource/8nqg-ia7v.json')
+      .then(res => res.json())
+      .then(Jobs => {
+        let JobsArray = Jobs.map(
+          Job => {
+            let Job_location = {
+              comment: Job.comments,
+              street: Job.street_1,
+              zip: Job.zip,
+              website: Job.website,
+              lat: Job.latitude,
+              lng: Job.longitude,
+              nat: Job.nat
+            };
+            return Job_location;
+          }
+        );
+        self.setState({
+          Jobs: JobsArray
+        });
+      });
   }
-
-}
+};
 
 export default Utility;

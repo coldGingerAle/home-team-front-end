@@ -1,5 +1,5 @@
 .home {
-  background: url('https://fthmb.tqn.com/ARpsGX6VWaDb7BUslcrwFhRyokk=/960x0/filters:no_upscale()/backpacker-in-new-york-city-587b58c45f9b584db323a086.jpg') no-repeat center center fixed;
+  background: url('http://www.xsjjys.com/data/out/228/WHDQ-513639059.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -12,6 +12,35 @@
 .center{
     position:absolute;
     left:35%;
-    top:65%;
+    top:85%;
     margin:-100px 0 0 -150px;
+}
+
+
+.center-text{
+
+    position:absolute;
+    left:35%;
+    top:55%;
+    margin:-100px 0 0 -150px;
+
+
+}
+
+h1{
+  font-size: 120px;
+  font-family: sans-serif;
+  color: #5bd3ff;
+
+}
+
+h2{
+  padding-top: 125px;
+  padding-left: 150px;
+  font-style: italic;
+  color: white;
+}
+
+.card-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }

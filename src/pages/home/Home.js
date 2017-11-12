@@ -35,8 +35,9 @@ class Home extends Component {
         <div className="container center">
           <form onSubmit={this.handleFormSubmit}>
           <div className="row">
-          <div className="col s6 white">
-          <PlacesAutocomplete inputProps={inputProps} /></div>
+
+            <div className="col s6 white">
+              <PlacesAutocomplete inputProps={inputProps} /></div>
 
           <div className="col s2"><button type="submit" className="btn">Submit</button>
           </div></div>

@@ -32,8 +32,15 @@ class Home extends Component {
       onChange: this.onChange,
     }
     return (
-      <div className="container-fluid home">
 
+
+      <div className="container-fluid home">
+      <div className="center-text">
+      <h1> Lighthouse </h1>
+      </div>
+      <div className="center-text">
+      <h2> Homeless, no more!</h2>
+      </div>
         <div className="container center">
         <form onSubmit={this.handleFormSubmit}>
         <div className="row">

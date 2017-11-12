@@ -1,0 +1,19 @@
+.img-wrap {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 20px;
+
+}
+
+.navbar{
+  height: 130px !important;
+  margin-bottom: 0px !important;
+}
+
+.font-big{
+  font-size: 36px !important;
+  margin-top: 45px;
+}

@@ -3,6 +3,7 @@ import {withRouter} from "react-router-dom";
 import MapContainer from '../../components/MapContainer';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import Utility from './Utility';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import './Map.css';
 
 class Map extends Component {
@@ -25,12 +26,34 @@ class Map extends Component {
       dropInCenters: [],
       homeBases: [],
       hospitalCenters: [],
-      MHC: [],
-      Jobs: [],
-    };
+      address: 'Brooklyn, NY',
+      updatedLocation: {},
+      currentLocation: {
+        lat: 0,
+        lng: 0
+      }
+    }
+    this.onChange = this.onChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  toggleWifihotspotsSelected = () => {
+  onChange = (address) => this.setState({ address })
+
+  handleFormSubmit = (event) => {
+
+      event.preventDefault()
+
+      geocodeByAddress(this.state.address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => {
+          console.log('Success', latLng)
+          this.props.history.push({pathname: '/map', state: {loc: latLng}});
+        })
+        .catch(error => console.error('Error', error))
+
+    }
+
+  toggleWifihotspotsSelected() {
     var self = this;
     this.setState({
       wifihotspotsSelected: !self.state.wifihotspotsSelected
@@ -62,7 +85,7 @@ class Map extends Component {
     this.setState({
       MHC_Selected: !self.state.MHC_Selected
     });
-   
+
   }
   toggleJobsSelected = () =>{
     var self = this;
@@ -81,12 +104,35 @@ class Map extends Component {
   }
 
   render() {
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange,
+    }
     return (
       <div className="container-fluid">
+
+
+        <div className="col-md-10 col-md-offset-1" style={{ height: 350, marginBottom: 10 }}>
+          <MapContainer
+            wifihotspotsSelected = {this.state.wifihotspotsSelected}
+            dropInCentersSelected = {this.state.dropInCentersSelected}
+            homeBasesSelected = {this.state.homeBasesSelected}
+            hospitalCentersSelected = {this.state.hospitalCentersSelected}
+            wifihotspots = {this.state.wifihotspots}
+            dropInCenters = {this.state.dropInCenters}
+            homeBases = {this.state.homeBases}
+            hospitalCenters = {this.state.hospitalCenters}
+            location = {this.props.location.state ? this.props.location.state.loc : {"lat": 40.6781784, "lng": -73.9441579}}
+            updatedLocation = {this.state.updatedLocation}
+           />
+        </div>
+
         <div
-          className="col-md-2  card-3"
-          style={{ height: 500 }}
+          className="col-md-5 col-md-offset-1 card-3 col-xs-12"
+          style={{ height: 200}}
         >
+
+          <div className="col-md-6 col-xs-12">
           <Checkbox
             toggle={this.toggleWifihotspotsSelected}
             selected={this.state.wifihotspotsSelected}
@@ -102,6 +148,8 @@ class Map extends Component {
             selected={this.state.homeBasesSelected}
             name={'Home Base Locations'}
           />
+          </div>
+          <div className="col-md-6">
           <Checkbox
             toggle={this.toggleHospitalCentersSelected}
             selected={this.state.hospitalCentersSelected}
@@ -117,28 +165,25 @@ class Map extends Component {
           selected={this.state.JobsSelected}
           name={'Job Fairs/Center'}
         />
-         
         </div>
-        <div className="col-md-8" style={{ height: 500 }}>
-          <MapContainer
-            wifihotspotsSelected={this.state.wifihotspotsSelected}
-            dropInCentersSelected={this.state.dropInCentersSelected}
-            homeBasesSelected={this.state.homeBasesSelected}
-            hospitalCentersSelected={this.state.hospitalCentersSelected}
-            MHC_Selected={this.state.MHC_Selected}
-            JobsSelected={this.state.JobsSelected}
-            wifihotspots={this.state.wifihotspots}
-            dropInCenters={this.state.dropInCenters}
-            Jobs={this.state.Jobs}
-            homeBases={this.state.homeBases}
-            hospitalCenters={this.state.hospitalCenters}
-            MHC={this.state.MHC}
-            location={
-              this.props.location.state
-                ? this.props.location.state.loc
-                : { lat: 40.6781784, lng: -73.9441579 }
-            }
-          />
+
+
+        </div>
+
+
+
+
+        <div className="col-md-5">
+          <div className="col-md-10 col-md-offset-1 card-3">
+            <form onSubmit={this.handleFormSubmit}>
+            <div className="row">
+            <div className="col s6 white">
+            <PlacesAutocomplete inputProps={inputProps} /></div>
+
+            <div className="col s2"><button type="submit" className="btn">Submit</button>
+            </div></div>
+          </form>
+          </div>
         </div>
       </div>
     );

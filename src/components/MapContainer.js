@@ -1,10 +1,15 @@
 import React from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import ContainerUtil from './Utility';
+import './MapContainer.css';
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentLocationGeolocation: {
+        lat: 0,
+        lng: 0
+      },
       currentLocation: {
         lat: 40.7127753,
         lng: -74.0059728
@@ -15,15 +20,25 @@ export class MapContainer extends React.Component {
     };
   }
 
-  componentDidMount() {
+  MapMarkers = (place)=>{
+    let info = "";
+    for(let key in place){
+      info += (key + " " + place[key]);
+    }
+
+    return info;
+  }
+
+componentDidMount() {
     var self = this;
     this.setState({
       currentLocation: {
         lat: self.props.location.lat,
         lng: self.props.location.lng,
       }
-})
-  }
+    })
+}
+
   onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
@@ -48,13 +63,13 @@ export class MapContainer extends React.Component {
       <Map
         google={this.props.google}
         onClick={this.onMapClicked}
-        style={{ width: '100%', height: '500px', position: 'relative' }}
+        style={{ width: '100%', height: '350px', position: 'relative' }}
         className={'map'}
         initialCenter={{
           lat: this.state.currentLocation.lat,
           lng: this.state.currentLocation.lng
         }}
-        zoom={17}
+        zoom={13}
         visible={true}
         icon={{
           url: 'https://wallpaperbrowse.com/media/images/pictures-1.jpg'
@@ -159,7 +174,7 @@ export class MapContainer extends React.Component {
                     name={<p>{ContainerUtil.MapMarkers(place)}</p>}
                   />
                 );
-            })} 
+            })}
             {this.props.JobsSelected &&
               this.props.Jobs.map((place, index) => {
                 return (
@@ -176,7 +191,7 @@ export class MapContainer extends React.Component {
                     name={<p>{ContainerUtil.MapMarkers(place)}</p>}
                   />
                 );
-            })} 
+            })}
 
         <InfoWindow
           marker={this.state.activeMarker}

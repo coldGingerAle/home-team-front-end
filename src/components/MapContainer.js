@@ -1,6 +1,6 @@
 import React from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-
+import ContainerUtil from './Utility';
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -77,14 +77,14 @@ export class MapContainer extends React.Component {
               <Marker
                 onClick={this.onMarkerClick}
                 key={index}
-                position={{ lat: place.loc.lat, lng: place.loc.lng }}
+                position={{ lat: place.lat, lng: place.lng }}
                 icon={{
                   url:
                     'https://housing.umn.edu/sites/housing.umn.edu/files/prep_your_computer.png',
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-                name="Wifi"
+                name="home"//name={<p>{ContainerUtil.MapMarkers(place)}</p>}
               />
             );
           })}
@@ -95,14 +95,14 @@ export class MapContainer extends React.Component {
               <Marker
                 key={index}
                 onClick={this.onMarkerClick}
-                position={{ lat: place.loc.lat, lng: place.loc.lng }}
+                position={{ lat: place.lat, lng: place.lng }}
                 icon={{
                   url:
                     'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Home-icon.png',
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-                name="DropInCenter"
+                name="home"// name={<p>{ContainerUtil.MapMarkers(place)}</p>}
               />
             );
           })}
@@ -116,11 +116,11 @@ export class MapContainer extends React.Component {
                 position={{ lat: place.lat, lng: place.lng }}
                 icon={{
                   url:
-                    'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Home-icon.png',
+                    'http://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png',
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-                name={<p>{place.nta}</p>}
+                name={<p>{ContainerUtil.MapMarkers(place)}</p>}
               />
             );
           })}
@@ -138,10 +138,45 @@ export class MapContainer extends React.Component {
                     anchor: new this.props.google.maps.Point(32, 32),
                     scaledSize: new this.props.google.maps.Size(32, 32)
                   }}
-                  name={<p>{place.nta}</p>}
+                  name={<p>{ContainerUtil.MapMarkers(place)}</p>}
                 />
               );
             })}
+
+          {this.props.MHC_Selected &&
+              this.props.MHC.map((place, index) => {
+                return (
+                  <Marker
+                    key={index}
+                    onClick={this.onMarkerClick}
+                    position={{ lat: place.lat, lng: place.lng }}
+                    icon={{
+                      url:
+                        'https://png.icons8.com/?id=40521&size=280',
+                      anchor: new this.props.google.maps.Point(32, 32),
+                      scaledSize: new this.props.google.maps.Size(32, 32)
+                    }}
+                    name={<p>{ContainerUtil.MapMarkers(place)}</p>}
+                  />
+                );
+            })} 
+            {this.props.JobsSelected &&
+              this.props.Jobs.map((place, index) => {
+                return (
+                  <Marker
+                    key={index}
+                    onClick={this.onMarkerClick}
+                    position={{ lat: place.lat, lng: place.lng }}
+                    icon={{
+                      url:
+                        'https://cdn2.iconfinder.com/data/icons/mixed-rounded-flat-icon/512/briefcase-512.png',
+                      anchor: new this.props.google.maps.Point(32, 32),
+                      scaledSize: new this.props.google.maps.Size(32, 32)
+                    }}
+                    name={<p>{ContainerUtil.MapMarkers(place)}</p>}
+                  />
+                );
+            })} 
 
         <InfoWindow
           marker={this.state.activeMarker}

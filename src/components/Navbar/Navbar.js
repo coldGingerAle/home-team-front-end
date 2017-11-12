@@ -11,7 +11,6 @@ class Navbar extends Component {
         <div className="container-fluid">
 
           <div className="navbar-header">
-
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar"></span>
@@ -19,7 +18,7 @@ class Navbar extends Component {
               <span className="icon-bar"></span>
             </button>
             <div className="img-wrap">
-        <Link to="/"><img className="img-responsive "src={logo} alt="logo"/> </Link>
+          <Link to="/"><img className="img-responsive "src={logo} /> </Link>
             </div>
           </div>
 
@@ -36,7 +35,6 @@ class Navbar extends Component {
         </div>
         </nav>
       </div>
-
     );
   }
 }

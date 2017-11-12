@@ -22,9 +22,15 @@ class Map extends Component {
       hospitalCentersSelected: false,
       MHC_Selected: false,
       JobsSelected: false,
+      SubsSelected: false,
+      FSSelected:false,
       wifihotspots: [],
       dropInCenters: [],
       homeBases: [],
+      Subs: [],
+      FS: [],
+      MHC: [],
+      Jobs: [],
       hospitalCenters: [],
       address: 'Brooklyn, NY',
       updatedLocation: {},
@@ -93,6 +99,20 @@ class Map extends Component {
       JobsSelected: !self.state.JobsSelected
     });
   }
+
+  toggleSubsSelected = () => {
+   var self = this;
+   this.setState({
+     SubsSelected: !self.state.SubsSelected
+   });
+ };
+ toggleFSSelected = () => {
+   var self = this;
+   this.setState({
+     FSSelected: !self.state.FSSelected
+   });
+ };
+
   componentDidMount() {
     var self = this;
     Utility.getWifiHotSpots(self);
@@ -101,6 +121,8 @@ class Map extends Component {
     Utility.getHospitalCenters(self);
     Utility.getMentalHealthLocations(self);
     Utility.getJobLocations(self);
+    Utility.getSubLocations(self);
+    Utility.getFSLocations(self);
   }
 
   render() {
@@ -124,12 +146,20 @@ class Map extends Component {
             hospitalCenters = {this.state.hospitalCenters}
             location = {this.props.location.state ? this.props.location.state.loc : {"lat": 40.6781784, "lng": -73.9441579}}
             updatedLocation = {this.state.updatedLocation}
+            MHC={this.state.MHC}
+            Subs={this.state.Subs}
+            FS={this.state.FS}
+            MHC_Selected={this.state.MHC_Selected}
+            JobsSelected={this.state.JobsSelected}
+            SubsSelected={this.state.SubsSelected}
+            FSSelected={this.state.FSSelected}
+            Jobs={this.state.Jobs}
            />
         </div>
 
         <div
           className="col-md-5 col-md-offset-1 card-3 col-xs-12"
-          style={{ height: 200}}
+          style={{ height: 250}}
         >
 
           <div className="col-md-6 col-xs-12">
@@ -148,6 +178,11 @@ class Map extends Component {
             selected={this.state.homeBasesSelected}
             name={'Home Base Locations'}
           />
+          <Checkbox
+            toggle={this.toggleSubsSelected}
+            selected={this.state.SubsSelected}
+            name={'Subway'}
+            />
           </div>
           <div className="col-md-6">
           <Checkbox
@@ -165,6 +200,11 @@ class Map extends Component {
           selected={this.state.JobsSelected}
           name={'Job Fairs/Center'}
         />
+        <Checkbox
+          toggle={this.toggleFSSelected}
+          selected={this.state.FSSelected}
+          name={'Food Stamp Centers'}
+          />
         </div>
 
 

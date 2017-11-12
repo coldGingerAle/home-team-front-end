@@ -86,7 +86,7 @@ componentDidMount() {
         }}
         name="Here"
       />
-        {this.props.wifihotspotsSelected &&
+      {this.props.wifihotspotsSelected &&
           this.props.wifihotspots.map((place, index) => {
             return (
               <Marker
@@ -99,11 +99,10 @@ componentDidMount() {
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-                name="home"//name={<p>{ContainerUtil.MapMarkers(place)}</p>}
+                name={"Wifi Spot"}
               />
             );
           })}
-
         {this.props.dropInCentersSelected &&
           this.props.dropInCenters.map((place, index) => {
             return (
@@ -117,11 +116,10 @@ componentDidMount() {
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-                name="home"// name={<p>{ContainerUtil.MapMarkers(place)}</p>}
+                name={<p>{ContainerUtil.MapMarkers(place)}</p>}
               />
             );
           })}
-
         {this.props.homeBasesSelected &&
           this.props.homeBases.map((place, index) => {
             return (
@@ -139,7 +137,6 @@ componentDidMount() {
               />
             );
           })}
-
           {this.props.hospitalCentersSelected &&
             this.props.hospitalCenters.map((place, index) => {
               return (
@@ -157,7 +154,6 @@ componentDidMount() {
                 />
               );
             })}
-
           {this.props.MHC_Selected &&
               this.props.MHC.map((place, index) => {
                 return (
@@ -192,13 +188,47 @@ componentDidMount() {
                   />
                 );
             })}
-
+            {this.props.SubsSelected &&
+              this.props.Subs.map((place, index) => {
+                return (
+                  <Marker
+                    key={index}
+                    onClick={this.onMarkerClick}
+                    position={{ lat: place.lat, lng: place.lng }}
+                    icon={{
+                      url:
+                        'https://cdn.iconscout.com/public/images/icon/free/png-512/metro-subway-underground-train-railway-engine-emoj-symbol-368e7101b9ce45ca-512x512.png',
+                      anchor: new this.props.google.maps.Point(32, 32),
+                      scaledSize: new this.props.google.maps.Size(32, 32)
+                    }}
+                    name={<p>{ContainerUtil.MapMarkers(place)}</p>}
+                  />
+                );
+            })}
+            {this.props.FSSelected &&
+              this.props.FS.map((place, index) => {
+                return (
+                  <Marker
+                    key={index}
+                    onClick={this.onMarkerClick}
+                    position={{ lat: place.lat, lng: place.lng }}
+                    icon={{
+                      url:
+                        'https://www.hungerfreecolorado.org/wp-content/uploads/2014/11/Food-Stamps-Fuel.jpg',
+                      anchor: new this.props.google.maps.Point(32, 32),
+                      scaledSize: new this.props.google.maps.Size(32, 32)
+                    }}
+                    name={<p>{ContainerUtil.MapMarkers(place)}</p>}
+                  />
+                );
+            })}
         <InfoWindow
+
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
         >
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
+          <div className="info-window">
+            <h6>{this.state.selectedPlace.name}</h6>
           </div>
         </InfoWindow>
       </Map>

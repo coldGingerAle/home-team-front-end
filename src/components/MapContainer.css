@@ -1,5 +1,7 @@
-@media only screen and (max-width: 768px) {
-  .map {
-    height: 500px
-  }
+.info-window {
+ font-size: 23rem;
+ color: rgb(0, 0, 0);
+}
+.info-window h6{
+ font-size: 23px;
 }

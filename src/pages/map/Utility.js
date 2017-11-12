@@ -1,13 +1,10 @@
-
 const Utility = {
   Add: (x) => {
     console.log("Called Add", x)
   },
-
   Subtract: (x) => {
     console.log("Called subtract", x)
   },
-
   getWifiHotSpots: (self) => {
     fetch('https://data.cityofnewyork.us/resource/24t3-xqyv.json')
       .then(res => res.json())
@@ -18,7 +15,6 @@ const Utility = {
             lng: hotspot.location_lat_long.coordinates[0]
           }
 
-
           return hotspot_lat_long;
         })
         self.setState({
@@ -26,13 +22,14 @@ const Utility = {
         })
       })
   },
-
   getHomelessDropInCenters: (self) => {
     fetch('https://data.cityofnewyork.us/resource/kjtk-8yxq.json')
       .then(res => res.json())
       .then(locations => {
         let locationsArray = locations.map(location => {
           let locationObject = {
+            name: location.center_name,
+            address: location.address,
             lat: location.latitude,
             lng: location.longitude,
           }
@@ -44,7 +41,6 @@ const Utility = {
         })
       })
   },
-
   getHomeBaseLocations: (self) => {
       fetch('https://data.cityofnewyork.us/resource/5ud2-iqje.json')
           .then(res => res.json())
@@ -64,8 +60,8 @@ const Utility = {
               })
           })
   },
-
-
+  /*This function returns the location and contact info
+of nyc hospitals and health facilities*/
   getHospitalCenters: self => {
     fetch('https://data.cityofnewyork.us/resource/ymhw-9cz9.json')
       .then(res => res.json())
@@ -129,7 +125,48 @@ const Utility = {
           Jobs: JobsArray
         });
       });
+  },
+  getSubLocations: self => {
+    fetch('https://data.cityofnewyork.us/resource/kk4q-3rt2.json')
+      .then(res => res.json())
+      .then(Subs => {
+        let SubsArray = Subs.map(
+          Subs => {
+            let Subs_location = {
+              line: Subs.line,
+              name: Subs.name,
+              notes: Subs.notes,
+              lat: Subs.the_geom.coordinates[1],
+              lng: Subs.the_geom.coordinates[0],
+            };
+            return Subs_location;
+          }
+        );
+        self.setState({
+          Subs: SubsArray
+        });
+      });
+  },
+  getFSLocations: self => {
+    fetch('https://data.cityofnewyork.us/resource/ma86-m5w3.json')
+      .then(res => res.json())
+      .then(FS => {
+        let FSArray = FS.map(
+          FS => {
+            let FS_location = {
+              facility_name: FS.facility_name,
+              street_address: FS.street_address,
+              phone_number_s_: FS.phone_number_s_,
+              lat: FS.latitude,
+              lng: FS.longitude,
+            };
+            return FS_location;
+          }
+        );
+        self.setState({
+          FS: FSArray
+        });
+      });
   }
 };
-
 export default Utility;

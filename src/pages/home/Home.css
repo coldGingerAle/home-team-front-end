@@ -10,6 +10,7 @@
 }
 
 .center{
+
     position:absolute;
     left:35%;
     top:85%;
@@ -18,7 +19,6 @@
 
 
 .center-text{
-
     position:absolute;
     left:35%;
     top:55%;
@@ -27,14 +27,14 @@
 
 }
 
-h1{
+.large-text{
   font-size: 120px;
   font-family: sans-serif;
   color: #5bd3ff;
 
 }
 
-h2{
+.medium-text{
   padding-top: 125px;
   padding-left: 150px;
   font-style: italic;

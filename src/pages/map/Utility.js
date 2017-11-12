@@ -17,7 +17,7 @@ const Utility = {
             lat: hotspot.location_lat_long.coordinates[1],
             lng: hotspot.location_lat_long.coordinates[0]
           }
-         
+
 
           return hotspot_lat_long;
         })
@@ -36,7 +36,7 @@ const Utility = {
             lat: location.latitude,
             lng: location.longitude,
           }
-          
+
           return locationObject;
         })
         self.setState({
@@ -65,8 +65,7 @@ const Utility = {
           })
   },
 
-  /*This function returns the location and contact info
-of nyc hospitals and health facilities*/
+
   getHospitalCenters: self => {
     fetch('https://data.cityofnewyork.us/resource/ymhw-9cz9.json')
       .then(res => res.json())

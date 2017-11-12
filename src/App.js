@@ -9,8 +9,8 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-     
-        
+
+
         <Switch >
           <Route path="/" exact={true} component={PageShell(Home)} />
           <Route path="/profile" exact component={PageShell(Profile)} />

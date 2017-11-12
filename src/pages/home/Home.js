@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
-import axios from "axios";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import './Home.css';
 
@@ -35,23 +34,27 @@ class Home extends Component {
 
 
       <div className="container-fluid home">
-      <div className="center-text">
-      <h1> Lighthouse </h1>
-      </div>
-      <div className="center-text">
-      <h2> Homeless, no more!</h2>
-      </div>
+        <div className="center-text">
+          <h1 className="large-text"> Lighthouse </h1>
+        </div>
+        <div className="center-text">
+          <h2 className="medium-text"> A guided path to recovery</h2>
+        </div>
         <div className="container center">
-        <form onSubmit={this.handleFormSubmit}>
-        <div className="row">
-        <div className="col s6 white">
-        <PlacesAutocomplete inputProps={inputProps} /></div>
+          <form onSubmit={this.handleFormSubmit}>
+            <div className="row">
+            <div className="col s6 white">
+            <PlacesAutocomplete inputProps={inputProps} /></div>
 
-        <div className="col s2"><button type="submit" className="btn">Submit</button>
-        </div></div>
-      </form>
-</div>
+            <div className="col s2"><button type="submit" className="btn">Search</button>
+          </div></div>
+          </form>
+        </div>
+
       </div>
+
+
+
     );
   }
 }

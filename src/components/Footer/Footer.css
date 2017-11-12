@@ -1,0 +1,15 @@
+.center-text-align{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.img-wrap-footer {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin: 10px;
+
+
+}

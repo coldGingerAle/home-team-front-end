@@ -15,15 +15,25 @@ export class MapContainer extends React.Component {
     };
   }
 
-  componentDidMount() {
+  MapMarkers = (place)=>{
+    let info = "";
+    for(let key in place){
+      info += (key + " " + place[key]);
+    }
+
+    return info;
+  }
+
+componentDidMount() {
     var self = this;
     this.setState({
       currentLocation: {
         lat: self.props.location.lat,
         lng: self.props.location.lng,
       }
-})
-  }
+    })
+}
+
   onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
@@ -120,7 +130,7 @@ export class MapContainer extends React.Component {
                   anchor: new this.props.google.maps.Point(32, 32),
                   scaledSize: new this.props.google.maps.Size(32, 32)
                 }}
-                name={<p>{place.nta}</p>}
+                name={<p>{this.MapMarkers(place)}</p>}
               />
             );
           })}

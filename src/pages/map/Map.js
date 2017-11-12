@@ -3,6 +3,7 @@ import {withRouter} from "react-router-dom";
 import MapContainer from '../../components/MapContainer';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import Utility from './Utility';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import './Map.css';
 
 class Map extends Component {
@@ -22,9 +23,29 @@ class Map extends Component {
       wifihotspots: [],
       dropInCenters: [],
       homeBases: [],
-      hospitalCenters: []
+      hospitalCenters: [],
+      address: { address: '' },
+      updatedLocation: {}
     }
+    this.onChange = this.onChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
+
+  onChange = (address) => this.setState({ address })
+
+  handleFormSubmit = (event) => {
+
+      event.preventDefault()
+
+      geocodeByAddress(this.state.address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => {
+          console.log('Success', latLng)
+          this.props.history.push({pathname: '/map', state: {loc: latLng}});
+        })
+        .catch(error => console.error('Error', error))
+
+    }
 
   toggleWifihotspotsSelected() {
     var self = this;
@@ -63,6 +84,10 @@ class Map extends Component {
   }
 
   render() {
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange,
+    }
     return (
       <div className="container-fluid">
         <div className="col-md-2 col-md-offset-1 card-3" style={{height: 500}}>
@@ -82,7 +107,20 @@ class Map extends Component {
             homeBases = {this.state.homeBases}
             hospitalCenters = {this.state.hospitalCenters}
             location = {this.props.location.state ? this.props.location.state.loc : {"lat": 40.6781784, "lng": -73.9441579}}
+            updatedLocation = {this.state.updatedLocation}
            />
+        </div>
+        <div className="container-fluid">
+          <div className="container">
+            <form onSubmit={this.handleFormSubmit}>
+            <div className="row">
+            <div className="col s6 white">
+            <PlacesAutocomplete inputProps={inputProps} /></div>
+
+            <div className="col s2"><button type="submit" className="btn">Submit</button>
+            </div></div>
+          </form>
+          </div>
         </div>
       </div>
     );
